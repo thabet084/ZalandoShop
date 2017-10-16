@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="ZalandoShop.View.ArticleSearch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ZalandoShop.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+     xmlns:converters="using:ZalandoShop.Converters"
+    DataContext="{Binding ArticleSearchVM,Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <!--<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Keyword, Mode=TwoWay}" Height="20" ></TextBox>-->
+        <AutoSuggestBox x:ConnectionId='1' Grid.Row="0" Grid.Column="1" Text="{Binding Keyword, Mode=TwoWay}"   PlaceholderText="Search" QueryIcon="Find" 
+                                                        
+                                                              
+                                                                  ></AutoSuggestBox>
+        <StackPanel Grid.Row="1" Grid.Column="1"  Orientation="Horizontal">
+            <RadioButton x:ConnectionId='2' Name="rBtnIsMenChecked" GroupName="Gender" IsChecked="{Binding IsMenChecked, Mode=TwoWay}" >MEN</RadioButton>
+            <RadioButton x:ConnectionId='3' Name="rBtnIsWomenChecked" GroupName="Gender" IsChecked="{Binding IsWomenChecked, Mode=TwoWay}">WOMEN</RadioButton>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ErrorMessage}" Visibility="{Binding IsErrorShowen,Converter={StaticResource BoolToVis}}" FontWeight="Bold" Foreground="Red"  Height="20"></TextBlock>
+
+        <Button Grid.Row="4" Grid.Column="1"  HorizontalAlignment="Center" Command="{Binding SearchCommand}">Search</Button>
+
+    </Grid>
+</Page>
+
