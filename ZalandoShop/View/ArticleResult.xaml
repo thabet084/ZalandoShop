@@ -20,7 +20,33 @@
     
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="MobileStateReadView">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="lstArticlesWrapGrid.Orientation"
+                                Value="Vertical" />                        
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup>
+                <VisualState x:Name="WideStateReadView">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="lstArticlesWrapGrid.Orientation"
+                                Value="Horizontal" />                         
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+        </VisualStateManager.VisualStateGroups>
 
 
         <ListView Grid.Row="0" Name="lstArticles" Margin="10 10 10 10" ItemsSource="{Binding Articles}"   
@@ -31,7 +57,7 @@
 
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ItemsWrapGrid  Orientation="Horizontal" />
+                    <ItemsWrapGrid Name="lstArticlesWrapGrid"  Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
