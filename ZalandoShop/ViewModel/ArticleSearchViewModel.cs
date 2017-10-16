@@ -97,7 +97,7 @@ namespace ZalandoShop.ViewModel
 
 
         }
-        private bool ContainErrors()
+        public bool ContainErrors()
         {
             IsErrorShowen = false;
 

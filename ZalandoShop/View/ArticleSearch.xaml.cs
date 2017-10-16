@@ -42,16 +42,20 @@ namespace ZalandoShop.View
                     currentGender = Gender.Male;
                 else
                     currentGender = Gender.Female;
+                bool IsErrorHappened = ((ArticleSearchViewModel)this.DataContext).ContainErrors();
+                if (!IsErrorHappened)
+                {
+                    var articles = await svcHelper.GetArticles(sender.Text, currentGender, 1, 5);
 
-                var articles= await svcHelper.GetArticles(sender.Text, currentGender, 1, 5);
-                
-                sender.ItemsSource = articles.Select(a=>a.Name);
+                    sender.ItemsSource = articles.Select(a => a.Name);
+                }
             }
         }
 
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            if (args.ChosenSuggestion != null)
+            bool IsErrorHappened = ((ArticleSearchViewModel)this.DataContext).ContainErrors();
+            if (args.ChosenSuggestion != null & !IsErrorHappened)
             {
               
                 Models.ArticleSearch articleSearch = new Models.ArticleSearch();
